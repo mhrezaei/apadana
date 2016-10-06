@@ -1,0 +1,146 @@
+#divIndex {
+  width: 100%;
+
+  .top {
+    background-color: #FDEDD0;
+    margin: auto;
+    text-align: center;
+    padding: 50px;
+
+    .fa-calculator {
+      font-size: 50px;
+    }
+  }
+
+
+  .convert {
+    background-color: #FD795B;
+    color: #ffffff;
+    text-align: center;
+    padding: 30px;
+    font-size: 15px;
+
+    input , select , span {
+      background-color: #ff795b;
+      color: #ffffff;
+      text-align: center;
+      font-size: 15px;
+      margin: 5px;
+    }
+
+    #divOutput {
+      font-weight: bold;
+      font-size: 40px;
+      padding-top: 20px;
+    }
+  }
+
+
+  .rates {
+    background-color: #BCF1ED;
+    padding: 10px;
+
+    .nav-tabs {
+      margin-bottom: 30px;
+
+      li.active a {
+      }
+      li a:hover {
+      }
+    }
+    .row {
+      width: 95%;
+      margin: auto;
+    }
+
+    img.currency {
+      width: 50px;
+      height: 50px;
+    }
+
+    iframe {
+      width: 90%;
+      height: 350px;
+    }
+  }
+
+
+  .clocks {
+    padding: 20px 20px 40px 50px;
+    background-color: #673AB7;
+
+  }
+
+  .coins {
+    background-color: #FFF0AA;
+
+    .row {
+      width: 95%;
+      margin: auto;
+    }
+
+    div.prices {
+      padding-top: 100px;
+    }
+
+    img.coin {
+      width: 500px;
+      height: 500px;
+      padding: 20px;
+    }
+  }
+}
+
+.about {
+  padding-top: 50px;
+  color: #272525;
+
+  .lines {
+    padding-top: 10px;
+    font-family: tahaTitr;
+    font-size: 15px;
+  }
+
+  .line1 {
+    font-weight: bold;
+  }
+
+  .btn-lg {
+    margin: 0 20px;
+    width: 200px;
+  }
+
+  .btn-link {
+    width: 150px;
+  }
+
+
+  }
+
+.footer {
+  background-color: #262626;
+  padding: 50px 10px 10px 10px ;
+  font-size: 10px;
+  color: #c6c6c6;
+
+  .right {
+  }
+
+  .left , a {
+    color: gray;
+    text-align: left;
+  }
+
+}
+
+img.logo {
+  width: 300px;
+  height: 300px;
+}
+
+.title {
+  font-family: tahaTitr;
+  font-size: 50px;
+  font-weight: bold;
+}
+

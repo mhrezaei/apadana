@@ -1,0 +1,39 @@
+body {
+  background-color: aliceblue;
+}
+
+#divAbout {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  background-color: #37b4ff;
+  margin: auto;
+  text-align: center;
+  padding-top: 90px;
+
+  div.map {
+    margin: auto;
+    padding: 50px;
+    text-align: center;
+
+    img.map {
+      width: 80%;
+      border-radius: 20px;
+      border: 1px solid #d6c39a;
+    }
+  }
+}
+
+img.logo {
+  width: 300px;
+  height: 300px;
+}
+
+.title {
+  font-family: tahaTitr;
+  font-size: 50px;
+  font-weight: bold;
+  line-height: 2.5;
+}
+

@@ -1,0 +1,192 @@
+body {
+  background-color: aliceblue;
+}
+#divIndex {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  .section {
+    width: 100%;
+    padding: 5px;
+  }
+}
+
+
+
+// ====================================================================================================
+#divIndex-top {
+  background-color: #37b4ff;
+  text-align: center;
+
+  img.logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .mainTitle {
+    font-family: tahaTitr;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .headerTitle {
+    text-align: center;
+    line-height: 2.0;
+  }
+
+  div.buttons {
+    padding-top: 130px;
+    text-align: left;
+  }
+  .button {
+    padding: 30px;
+    color: #4169E1;
+    font-family: tahaTitr;
+    font-weight: bold;
+  }
+}
+
+// ====================================================================================================
+#divIndex-slide {
+  background-color: #4169E1;
+  color: #ffffff;
+  padding: 20px;
+
+  .lines {
+    padding-top: 30px;
+    width: 100%;
+  }
+
+  .line {
+    text-align: center;
+    font-size: 12px;
+    line-height: 2.0;
+  }
+
+  .slide {
+    width: 100%;
+    margin: auto;
+    height: 250px;
+    border-radius: 10px;
+  }
+
+  .buttons {
+    padding: 30px;
+    margin: auto;
+  }
+
+  .tels {
+    direction: ltr;
+    padding-top: 10px;
+  }
+
+  img.social {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+// ====================================================================================================
+#divIndex-clocks {
+  background-color: #37b4ff;
+  padding: 20px 20px 40px 50px;
+  min-height: 180px;
+}
+
+
+// ====================================================================================================
+#divIndex-rates {
+  background-color: royalblue;
+  color: #ffffff;
+  min-height: 100px;
+  padding: 10px;
+  font-size: 12px;
+
+  .title {
+    padding: 20px;
+    font-family: tahaTitr;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .row {
+    width: 95%;
+    margin: auto;
+  }
+
+  img.currency {
+    width: 40px;
+    height: 40px;
+  }
+
+  iframe {
+    width: 90%;
+    height: 350px;
+    margin: auto;
+    float: left;
+  }
+
+}
+
+// ====================================================================================================
+#divIndex-coins {
+  background-color: #37b4ff;
+  color: #ffffff;
+  .row {
+    width: 95%;
+    margin: auto;
+  }
+
+  div.prices {
+    padding-top: 20px;
+  }
+
+  img.coin {
+    width: 300px;
+    height: 300px;
+    padding: 20px;
+  }
+
+}
+
+// ====================================================================================================
+#divIndex-convert {
+  background-color: royalblue;
+  color: #ffffff;
+  direction: ltr;
+  text-align: center;
+  line-height: 3.0;
+  font-size: 15px;
+
+  input, select, span {
+    background-color: royalblue;
+    color: #ffffff;
+    text-align: center;
+    font-size: 15px;
+    margin: 5px;
+    padding: 0;
+    width: 200px;
+  }
+}
+
+
+
+
+
+#divIndex-footer {
+  background-color: #262626;
+  padding: 50px 10px 10px 10px ;
+  font-size: 10px;
+  color: #c6c6c6;
+
+  .right {
+  }
+
+  .left , a {
+    color: gray;
+    text-align: left;
+  }
+
+}

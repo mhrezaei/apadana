@@ -1,0 +1,55 @@
+body {
+  background-color: aliceblue;
+}
+
+#divContact {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  background-color: #37b4ff;
+  padding: 70px;
+
+  .title {
+    font-family: tahaTitr;
+    padding-bottom: 20px;
+    margin: auto;
+    text-align: center;
+    font-size: 20px;
+  }
+
+  div.panel {
+    background-color: #ffffff;
+    padding: 50px;
+    margin: auto;
+    width: 800px;
+    border-radius: 10px;
+    border: 1px solid gray;
+  }
+
+  .help-block {
+    font-size: 10px;
+  }
+
+  .btn {
+    font-family: tahaTitr;
+    width: 200px;
+  }
+
+  .endNote {
+    margin: auto;
+    padding: 20px;
+    margin: auto;
+    line-height: 2.0;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .form-feed {
+//    border: 1px solid;
+//    border-radius: 5px;
+    margin: 20px auto 0 auto;
+    display: none;
+    width: 500px;
+  }
+}

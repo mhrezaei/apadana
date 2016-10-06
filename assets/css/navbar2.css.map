@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEE,oBAAa;EACX,KAAK,EAAE,IAAI;EACX,OAAO,EAAE,GAAG;EACZ,QAAQ,EAAE,QAAQ;EAClB,GAAG,EAAE,IAAI",
+"sources": ["../../application/views/sass/navbar2.scss"],
+"names": [],
+"file": "navbar2.css"
+}
