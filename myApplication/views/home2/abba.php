@@ -10,6 +10,15 @@
 	<div id="divIndex-clocks" class="section">
 		<?php $this->load->view('home/clocks' ); ?>
 	</div>
+
+    <!-- manager msg-->
+    <?php if (strlen(trim($manager_msg)) > 10){ ?>
+    <div class="clear"></div>
+    <div id="divIndex-rates" class="section" style="background-color: #9dcef9">
+        <?php $this->load->view('home2/manager_msg' , compact('currencies')); ?>
+    </div>
+    <?php } ?>
+
     <div class="clear"></div>
 	<div id="divIndex-rates" class="section">
 		<?php $this->load->view('home2/rates' , compact('currencies')); ?>

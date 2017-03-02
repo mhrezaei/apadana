@@ -37,12 +37,14 @@
                             'fax',
                             'site_email',
                             'admin_email',
-                            'about_us'
+                            'about_us',
+                            'manager_msg'
                         ))->from('setting')->get();
                     if($query->num_rows() > 0)
                     {
                         $data['success'] = 1;
                         $data['setting'] = $query->row_array();
+                        $data['setting']['manager_msg'] = htmlCoding($data['setting']['manager_msg'], 2);
                     }
                     else
                     {
@@ -76,6 +78,10 @@
                 $about = $this->input->post('about', TRUE, TRUE);
                 $pass = $this->input->post('pass', TRUE, TRUE);
                 $passV = $this->input->post('passV', TRUE, TRUE);
+                $msg = htmlCoding($this->input->post('msg'));
+
+                if (strlen($msg) < 10)
+                    $msg = null;
 
                 $data = array(
                     'site_title' => $site,
@@ -84,7 +90,8 @@
                     'fax' => $fax,
                     'site_email' => $email,
                     'admin_email' => $aEmail,
-                    'about_us' => $about
+                    'about_us' => $about,
+                    'manager_msg' => $msg,
                 );
 
                 if(strlen($pass) > 5 AND $pass == $passV)
@@ -138,29 +145,58 @@
                 {
                     for($i = 0; $i < count($ids); $i++)
                     {
-                        $currency = '';
-                        $currency['buy'] = $this->input->post('txtBuy' . $ids[$i]);
-                        if($this->input->post('txtBuy' . $ids[$i]) != $this->input->post('txtBuyOld' . $ids[$i]))
+                        if ($ids[$i] != 'new')
                         {
-                            $currency['last_buy'] = $this->input->post('txtBuyOld' . $ids[$i]);
-                        }
+                            $currency = '';
+                            $currency['code'] = $this->input->post('txtCode' . $ids[$i]);
+                            $currency['title'] = $this->input->post('txtTitle' . $ids[$i]);
+                            $currency['featured_image'] = $this->input->post('txtImages' . $ids[$i]);
 
-                        $currency['sales'] = $this->input->post('txtSales' . $ids[$i]);
-                        if($this->input->post('txtSales' . $ids[$i]) != $this->input->post('txtSalesOld' . $ids[$i]))
+                            $currency['buy'] = $this->input->post('txtBuy' . $ids[$i]);
+                            if($this->input->post('txtBuy' . $ids[$i]) != $this->input->post('txtBuyOld' . $ids[$i]))
+                            {
+                                $currency['last_buy'] = $this->input->post('txtBuyOld' . $ids[$i]);
+                            }
+
+                            $currency['sales'] = $this->input->post('txtSales' . $ids[$i]);
+                            if($this->input->post('txtSales' . $ids[$i]) != $this->input->post('txtSalesOld' . $ids[$i]))
+                            {
+                                $currency['last_sales'] = $this->input->post('txtSalesOld' . $ids[$i]);
+                            }
+
+                            $currency['draft'] = $this->input->post('txtDraft' . $ids[$i]);
+                            if($this->input->post('txtDraft' . $ids[$i]) != $this->input->post('txtDraftOld' . $ids[$i]))
+                            {
+                                $currency['last_draft'] = $this->input->post('txtDraftOld' . $ids[$i]);
+                            }
+
+                            $currency['arrangement'] = $this->input->post('txtArrange' . $ids[$i]);
+
+                            $this->db->where('id', $ids[$i]);
+                            $this->db->update('currency', $currency);
+                        }
+                        else
                         {
-                            $currency['last_sales'] = $this->input->post('txtSalesOld' . $ids[$i]);
+                            $new_currency = array(
+                                'code' => $this->input->post('txtCode'),
+                                'title' => $this->input->post('txtTitle'),
+                                'featured_image' => $this->input->post('txtImages'),
+                                'buy' => $this->input->post('txtBuy'),
+                                'sales' => $this->input->post('txtSales'),
+                                'draft' => $this->input->post('txtDraft'),
+                                'arrangement' => $this->input->post('txtArrange'),
+                                'last_buy' => 0,
+                                'last_sales' => 0,
+                                'last_draft' => 0,
+                            );
+
+                            if ($new_currency['code'] and $new_currency['title'] and $new_currency['featured_image']
+                            and $new_currency['buy'] and $new_currency['sales'] and $new_currency['draft'])
+                            {
+                                $this->db->insert('currency', $new_currency);
+                            }
+
                         }
-
-                        $currency['draft'] = $this->input->post('txtDraft' . $ids[$i]);
-                        if($this->input->post('txtDraft' . $ids[$i]) != $this->input->post('txtDraftOld' . $ids[$i]))
-                        {
-                            $currency['last_draft'] = $this->input->post('txtDraftOld' . $ids[$i]);
-                        }
-
-                        $currency['arrangement'] = $this->input->post('txtArrange' . $ids[$i]);
-
-                        $this->db->where('id', $ids[$i]);
-                        $this->db->update('currency', $currency);
                     }
                     $data['status'] = 2; // update success
                     $lUpdate['last_update'] = time();
@@ -173,6 +209,24 @@
                 echo json_encode($data);
             }
         } // ok
+
+        public function remove_currency()
+        {
+            $id = $this->input->post('cid', true, true);
+            if ($id + 0 > 0)
+            {
+                $update['status'] = 2;
+                $this->db->where('id', $id);
+                $this->db->update('currency', $update);
+
+                $data['status'] = 1;
+            }
+            else
+            {
+                $data['status'] = 2;
+            }
+            echo json_encode($data);
+        }
 
         public function coinsList()
         {

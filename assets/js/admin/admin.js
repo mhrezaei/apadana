@@ -25,6 +25,11 @@ function setting() // ok
     $('#settingProMsg').hide();
     $('.contentModel').slideUp();
 
+    for(name in CKEDITOR.instances)
+    {
+        CKEDITOR.instances[name].destroy()
+    }
+
     // ajax
     var j = 1;
     if(j > 0)
@@ -45,6 +50,10 @@ function setting() // ok
                 $('#txtTel').val(Data.setting.tel);
                 $('#txtFax').val(Data.setting.fax);
                 $('#txtAbout').val(Data.setting.about_us);
+                CKEDITOR.config.height = 400;
+                CKEDITOR.config.contentsLangDirection = 'rtl';
+                CKEDITOR.replace('managerMsg');
+                CKEDITOR.instances.managerMsg.setData(Data.setting.manager_msg);
                 $('#settingContent').slideDown();
             }
             else
@@ -71,6 +80,7 @@ function setting() // ok
             var about = $('#txtAbout').val();
             var pass = $('#txtPass').val();
             var passV = $('#txtPassA').val();
+            var msg = CKEDITOR.instances.managerMsg.getData();
             if(site.length > 3 && email.length > 3 && aEmail.length > 3 && address.length > 3 && tel.length > 3 && about.length > 3 && fax.length > 3)
             {
                 var con;
@@ -102,7 +112,18 @@ function setting() // ok
                             type: "POST",
                             url: base_url() + "ajax/editSetting",
                             cache: false,
-                            data: {site: site, email: email, aEmail: aEmail, address: address, tel: tel, about: about, pass: pass, passV: passV, fax: fax}
+                            data: {
+                                site: site,
+                                email: email,
+                                aEmail: aEmail,
+                                address: address,
+                                tel: tel,
+                                about: about,
+                                pass: pass,
+                                passV: passV,
+                                fax: fax,
+                                msg: msg
+                            }
                         }).done(function(Data){
                             if(Data.success == 1)
                             {
@@ -132,13 +153,40 @@ function setting() // ok
     });
 }
 
+function remove_currency(id) {
+    if (confirm('آیا از حذف این ارز اطمینان دارید؟'))
+    {
+        var load = $('#ajaxLoad');
+        load.show();
+        $('.contentModel').slideUp();
+        $('#currencyEdit').hide();
+        if (id + 0 > 0)
+        {
+            // ajax
+            var j = 1;
+            if (j > 0) {
+                $.ajax({
+                    dataType: "json",
+                    type: "POST",
+                    url: base_url() + "ajax/remove_currency",
+                    cache: false,
+                    data: {cid: id}
+                }).done(function (Data) {
+                    currencyList();
+                });
+                j--;
+            }
+        }
+    }
+}
+
 function currencyList() // ok
 {
     var load = $('#ajaxLoad');
     load.show();
     $('.contentModel').slideUp();
     $('#currencyEdit').hide();
-    var dataNo = '<tr><td style="text-align: center; width: 100%;" colspan="6" class="orang">هیچ ارزی جهت نمایش یافت نشد.</td></tr>';
+    var dataNo = '<tr><td style="text-align: center; width: 100%;" colspan="9" class="orang">هیچ ارزی جهت نمایش یافت نشد.</td></tr>';
 
     // ajax
     var j = 1;
@@ -157,15 +205,33 @@ function currencyList() // ok
                 var a = 1; //
                 $.each(Data.currency, function(i, obj) {
                     ht += '<tr>';
-                    ht += '<td style="text-align: center; width: 10%;">' + a + '</td>';
-                    ht += '<td style="text-align: center; width: 15%;">' + obj.title + '</td>';
-                    ht += '<td style="text-align: center; width: 22%; direction: rtl;"><input type="text" class="fild" name="txtBuy' + obj.id + '" id="txtBuy' + obj.id + '" style="width: 90%; float: right;" placeholder="ريال" value="' + obj.buy + '"><input type="hidden" class="fild" name="txtBuyOld' + obj.id + '" id="txtBuyOld' + obj.id + '" value="' + obj.buy + '"></td>';
-                    ht += '<td style="text-align: center; width: 22%; direction: rtl;"><input type="text" class="fild" name="txtSales' + obj.id + '" id="txtSales' + obj.id + '" style="width: 90%; float: right;" placeholder="ريال" value="' + obj.sales + '"><input type="hidden" class="fild" name="txtSalesOld' + obj.id + '" id="txtSalesOld' + obj.id + '" value="' + obj.sales + '"></td>';
-                    ht += '<td style="text-align: center; width: 22%; direction: rtl;"><input type="text" class="fild" name="txtDraft' + obj.id + '" id="txtDraft' + obj.id + '" style="width: 90%; float: right;" placeholder="ريال" value="' + obj.draft + '"><input type="hidden" class="fild" name="txtDraftOld' + obj.id + '" id="txtDraftOld' + obj.id + '" value="' + obj.draft + '"><input type="hidden" class="fild currencyID" name="txtID[]" id="txtID[]" style="width: 90%; float: right;" placeholder="ريال" value="' + obj.id + '"></td>';
-                    ht += '<td style="text-align: center; width: 22%; direction: rtl;"><input type="text" class="fild" name="txtArrange' + obj.id + '" id="txtArrange' + obj.id + '" style="width: 90%; float: right;" value="' + obj.arrangement + '"></td>';
+                    ht += '<td>' + a + '</td>';
+                    ht += '<td><input type="text" class="fild" name="txtTitle' + obj.id + '" id="txtTitle' + obj.id + '" style="width: 90%; float: right;" placeholder="عنوان" value="' + obj.title + '"></td>';
+                    ht += '<td><input type="text" class="fild" name="txtCode' + obj.id + '" id="txtCode' + obj.id + '" style="width: 90%; float: right;" placeholder="CODE" value="' + obj.code + '"></td>';
+                    ht += '<td><input type="text" class="fild" name="txtBuy' + obj.id + '" id="txtBuy' + obj.id + '" style="width: 90%; float: right;" placeholder="ريال" value="' + obj.buy + '"><input type="hidden" class="fild" name="txtBuyOld' + obj.id + '" id="txtBuyOld' + obj.id + '" value="' + obj.buy + '"></td>';
+                    ht += '<td><input type="text" class="fild" name="txtSales' + obj.id + '" id="txtSales' + obj.id + '" style="width: 90%; float: right;" placeholder="ريال" value="' + obj.sales + '"><input type="hidden" class="fild" name="txtSalesOld' + obj.id + '" id="txtSalesOld' + obj.id + '" value="' + obj.sales + '"></td>';
+                    ht += '<td><input type="text" class="fild" name="txtDraft' + obj.id + '" id="txtDraft' + obj.id + '" style="width: 90%; float: right;" placeholder="ريال" value="' + obj.draft + '"><input type="hidden" class="fild" name="txtDraftOld' + obj.id + '" id="txtDraftOld' + obj.id + '" value="' + obj.draft + '"><input type="hidden" class="fild currencyID" name="txtID[]" id="txtID[]" style="width: 90%; float: right;" placeholder="ريال" value="' + obj.id + '"></td>';
+                    ht += '<td><input type="text" class="fild" name="txtArrange' + obj.id + '" id="txtArrange' + obj.id + '" style="width: 90%; float: right;" value="' + obj.arrangement + '"></td>';
+                    ht += '<td><input type="text" class="fild" name="txtImages' + obj.id + '" id="txtImages' + obj.id + '" style="width: 90%; float: right;" value="' + obj.featured_image + '"></td>';
+                    ht += '<td style="color: #8a6d3b; cursor: pointer;" onclick="remove_currency(' + obj.id + ')">حذف</td>';
                     ht += '</tr>';
                     a++;
                 });
+
+                // add new
+                ht += '<tr>';
+                ht += '<td>' + a + '</td>';
+                ht += '<td><input type="text" class="fild" name="txtTitle" id="txtTitle" style="width: 90%; float: right;" placeholder="عنوان ارز جدید" value=""></td>';
+                ht += '<td><input type="text" class="fild" name="txtCode" id="txtCode" style="width: 90%; float: right;" placeholder="CODE" value=""></td>';
+                ht += '<td><input type="text" class="fild" name="txtBuy" id="txtBuy" style="width: 90%; float: right;" placeholder="ريال" value=""><input type="hidden" class="fild" name="txtBuyOld" id="txtBuyOld" value="0"></td>';
+                ht += '<td><input type="text" class="fild" name="txtSales" id="txtSales" style="width: 90%; float: right;" placeholder="ريال" value=""><input type="hidden" class="fild" name="txtSalesOld" id="txtSalesOld" value="0"></td>';
+                ht += '<td><input type="text" class="fild" name="txtDraft" id="txtDraft" style="width: 90%; float: right;" placeholder="ريال" value=""><input type="hidden" class="fild" name="txtDraftOld" id="txtDraftOld" value="0"><input type="hidden" class="fild currencyID" name="txtID[]" id="txtID[]" style="width: 90%; float: right;" value="new"></td>';
+                ht += '<td><input type="text" class="fild" name="txtArrange" id="txtArrange" style="width: 90%; float: right;" placeholder="چیدمان"></td>';
+                ht += '<td><input type="text" class="fild" name="txtImages" id="txtImages" style="width: 90%; float: right;" placeholder="تصویر"></td>';
+                ht += '<td><span style="color: #00CC00;">جدید</span> </td>';
+                ht += '</tr>';
+                a++;
+
                 $('#currencyList').html(ht);
             }
             else

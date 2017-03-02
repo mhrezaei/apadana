@@ -45,7 +45,7 @@ class Home extends CI_Controller {
             $currencies = '';
             for($i = 0; $i < count($currency); $i++)
             {
-                $currencies[$currency[$i]['code']] = array($currency[$i]['title'], $currency[$i]['buy'], $currency[$i]['sales'], $currency[$i]['draft'], $currency[$i]['title_en'], $currency[$i]['last_buy'], $currency[$i]['last_sales'], $currency[$i]['last_draft']);
+                $currencies[$currency[$i]['code']] = array($currency[$i]['title'], $currency[$i]['buy'], $currency[$i]['sales'], $currency[$i]['draft'], $currency[$i]['title_en'], $currency[$i]['last_buy'], $currency[$i]['last_sales'], $currency[$i]['last_draft'], $currency[$i]['featured_image']);
             }
         }
 
@@ -117,10 +117,13 @@ class Home extends CI_Controller {
         $news = new BlogFeed('http://www.cbi.ir/NewsRss.aspx?ln=fa');
         $news = $news->posts;
 
+        // manager msg
+        $manager_msg = htmlCoding($header['manager_msg'], 2);
+
 
 		//view...
 		$this->load->view('template/header2' , $headerInfo);
-		$this->load->view('home2/abba' , compact('headerInfo' ,'stuff','currencies','coins','stats', 'news'));
+		$this->load->view('home2/abba' , compact('headerInfo' ,'stuff','currencies','coins','stats', 'news', 'manager_msg'));
 		$this->load->view('template/footer');
 	}
 

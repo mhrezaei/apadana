@@ -26,7 +26,7 @@ class Admin extends CI_Controller {
     {
         if($this->input->post('uploadFile') AND $this->input->post('uploadFile') == 'yes')
         {
-            $config['upload_path'] = './assets/images/upload';
+            $config['upload_path'] = './assets/images/flags';
             $config['allowed_types'] = 'gif|jpg|png';
             $config['max_size']    = '2000';
             $config['max_width']  = '2048';

@@ -7,6 +7,7 @@
 <script type="text/javascript" src="<?php echo assets_url(); ?>js/admin/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo assets_url(); ?>js/admin/jquery.flot.js"></script>
 <script type="text/javascript" src="<?php echo assets_url(); ?>js/admin/doc.js"></script>
+    <script src="http://cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
 <script type="text/javascript" src="<?php echo assets_url(); ?>js/admin/admin.js"></script>
 </head>
 <body>

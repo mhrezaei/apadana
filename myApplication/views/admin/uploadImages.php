@@ -16,7 +16,7 @@
     elseif($status == 2)
     {
 ?>
-        File Address: &nbsp;<input type="text" style="width: 100%;" value="<?php echo assets_url() . 'images/upload/' . $success['upload_data']['file_name']; ?>">
+        File Address: &nbsp;<input type="text" style="width: 100%;" value="<?php echo assets_url() . 'images/flags/' . $success['upload_data']['file_name']; ?>">
         <br>
         File Name: &nbsp;<input type="text" style="width: 100%;" value="<?php echo $success['upload_data']['file_name']; ?>">
         <br> <br>

@@ -10,7 +10,7 @@ else
 ?>
 <div class="row" id="currencyRow" style="min-width: 450px; background-color: <?php echo $back; ?>;">
 	<div class="rates">
-		<img class="currency" src="<?php echo base_url('assets/images/flags/'.$currency.'.png'); ?>" style="width: 40px;" >
+		<img class="currency" src="<?php echo base_url('assets/images/flags/' . $rates[8]); ?>" style="width: 40px;" >
 	</div>
 	<div class="rates ratesText" style="font-weight: bold; min-width: 120px;">
 		<?php echo $rates[0]." (".$currency.") " ; ?>
